@@ -1,0 +1,183 @@
+@import "bourbon"
+$prefix-for-opera: false
+
+// Flex fixes quite a few issues (rounding errors), but since we always fallback to inline-block it can be omitted.
+$flex: true !default 
+
+
+// Group
+.group
+	letter-spacing: -.312em
+	font-family: Arial
+	*letter-spacing: normal
+	*word-spacing: -0.43em
+	overflow: hidden
+	width: 100%
+	@if $flex
+		@include display(flex)
+		@include flex-wrap(wrap)
+		@include align-items(flex-start)
+	
+.group:after, article:after
+	content: ""
+	display: table
+	clear: both
+
+.group, .content
+	font-size: 10px
+	font-size: 1rem
+	position: relative
+
+// Columns
+.col
+	text-align: left
+	display: inline-block
+	letter-spacing: normal
+	word-spacing: normal
+	vertical-align: top
+	img
+		vertical-align: top
+	@if $flex
+		@include flex-grow(0)
+		@include flex-shrink(0)
+	
+
+@mixin col-attr($prefix)
+	.#{$prefix}_show, .#{$prefix}_inline-block
+		display: inline-block
+	.#{$prefix}_hide, .#{$prefix}_none
+		display: none
+	.#{$prefix}_table
+		display: table
+	.#{$prefix}_table > .col
+		display: table-cell
+		vertical-align: middle // If im using _table its probably because I want things centered vertically.
+	.#{$prefix}_right
+		text-align: right
+		@if $flex
+			-webkit-justify-content: flex-end
+			justify-content: flex-end
+	.#{$prefix}_left
+		text-align: left
+		@if $flex
+			-webkit-justify-content: flex-start
+			justify-content: flex-start
+	.#{$prefix}_center
+		text-align: center
+		@if $flex
+			-webkit-justify-content: center
+			justify-content: center
+
+	.#{$prefix}_centered
+		margin-left: auto
+		margin-right: auto
+	.#{$prefix}_justified
+		text-align: justify
+		@if $flex
+			-webkit-justify-content: space-between
+			justify-content: space-between
+	.#{$prefix}_justified:after
+		content: ''
+		width: 100%
+		height: 0
+		display: inline-block
+	// FLEX only 
+	@if $flex
+		.#{$prefix}_around
+			justify-content: space-around
+		.#{$prefix}_around:after
+			display: none
+		.#{$prefix}_fill
+			flex-grow: 1
+	// FLEX only end
+
+
+@mixin build-grid($columns,$prefix)
+	@for $i from 1 through $columns
+		.#{$prefix}_#{$i}-#{$columns}
+			width: $i/$columns*100%
+
+
+@mixin build-grid-plus($columns,$prefix)
+
+	@include col-attr($prefix)
+
+	@include build-grid($columns,$prefix)
+	
+	.#{$prefix}_max-100
+		max-width: 100%
+	.#{$prefix}_15
+		width: 15%
+	.#{$prefix}_25
+		width: 25%
+	.#{$prefix}_33
+		width: 33.3332%
+	.#{$prefix}_35
+		width: 35%
+	.#{$prefix}_66
+		width: 66.6667%
+	.#{$prefix}_75
+		width: 75%
+	@for $i from 1 through 10
+		.#{$prefix}_#{$i}0
+			width: $i*10%
+
+
+@mixin build-specific-grid($base, $list, $prefix)
+	@each $i in $list
+		.#{$prefix}_#{$i}-#{$base}
+			width: $i/$base*100%
+
+
+@mixin _pad_4($prefix)
+	.#{$prefix}_pad_4 > 
+		.col:nth-child(4n+1)
+			padding-left: $min-padding
+			padding-right: $max-padding*.75
+		.col:nth-child(4n+2)
+			padding-left: $max-padding*.25
+			padding-right: $max-padding*.5
+		.col:nth-child(4n+3)
+			padding-left: $max-padding*.5
+			padding-right: $max-padding*.25
+		.col:nth-child(4n)
+			padding-left: $max-padding*.75
+			padding-right: $min-padding
+
+
+@mixin _pad_3($prefix)
+	.#{$prefix}_pad_3 > 
+		.col:nth-child(3n+1)
+			padding-left: $min-padding
+			padding-right: $max-padding*.66668
+		.col:nth-child(3n+2)
+			padding-left: $max-padding*.33332
+			padding-right: $max-padding*.33332
+		.col:nth-child(3n)
+			padding-left: $max-padding*.66668
+			padding-right: $min-padding
+
+
+@mixin _pad_2($prefix)
+	.#{$prefix}_pad_2 > 
+		.col:nth-child(2n+1)
+			padding-left: $min-padding
+			padding-right: $max-padding*.5
+		.col:nth-child(2n)
+			padding-left: $max-padding*.5
+			padding-right: $min-padding
+
+
+@mixin _pad_1($prefix)
+	.#{$prefix}_pad_1 > 
+		.col:nth-child(n)
+			padding-left: 0
+			padding-right: 0
+
+
+@mixin build-col-pads($prefix)
+	@include _pad_4($prefix)
+	@include _pad_3($prefix)
+	@include _pad_2($prefix)
+	@include _pad_1($prefix)
+

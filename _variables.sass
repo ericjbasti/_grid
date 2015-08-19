@@ -1,0 +1,102 @@
+
+$white:				#fff !default
+$grey-light:		#ddd !default
+$grey:				#999 !default
+$grey-dark:			#333 !default
+$black:				#000 !default
+
+$gray:				$grey !default
+$gray-light:		$grey-light !default
+$gray-dark:			$grey-dark !default
+
+$red: 				#b12 !default
+$orange: 			#f80 !default
+$yellow:			#fd2 !default
+$green: 			#1c0 !default
+$blue: 				#39f !default
+$ingigo: 			#00d !default
+$violot: 			#70d !default
+$magenta: 			#c08 !default
+
+
+
+$default-color:		#999
+$primary-color:		red
+$secondary-color:	orange
+
+$border-color:		#bbb !default
+$border-color-fade:	lighten($border-color, 10) !default
+
+
+$button-color: #284EC4!default
+$button-color-secondary: #B50085!default
+
+$input-radius: 5px !default
+$box-radius: $input-radius !default
+$button-radius: $input-radius !default
+
+$input-border-width: 2px !default
+$box-border-width: $input-border-width !default
+$button-border-width: $input-border-width !default
+
+// Mobile toggle widget thingy 
+$toggle-color:		$white !default
+$toggle-thickness:	10% !default
+$toggle-width:		60% !default
+$toggle-radius:		2px !default
+
+
+// The column padding, 1em is a good base, to make it easy to change elsewhere
+$max-padding:		1em !default
+$min-padding:		0 !default
+
+
+// Some default screen sizes.
+$largeScreen:		px-to-em(1080) !default
+$mediumScreen:		px-to-em(800) !default
+$smallScreen:		px-to-em(720) !default
+$extraSmallScreen:	px-to-em(400) !default
+
+
+// Some defaults for container sizing.
+$max-width:			1600px !default
+$inner-width:		1080px !default
+
+
+// Simple basic fonts.
+$font1:				"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !default
+$font2:				Helvetica, Arial, "Lucida Grande", sans-serif !default
+$font3:				Georgia, Times, serif !default
+$systemfont:		-apple-system, "Helvetica Neue", "Lucida Grande", Arial, sans-serif !default
+
+
+
+
+// http://stackoverflow.com/questions/1567184/sass-and-font-face
+=font-face($family, $path, $svg, $weight: 'normal', $style: 'normal')
+	@font-face
+		font-family: $family
+		src: url('#{$path}.eot')
+		src: url('#{$path}.eot?#iefix') format('embedded-opentype'), url('#{$path}.woff') format('woff'), url('#{$path}.ttf') format('truetype'), url('#{$path}.svg##{$svg}') format('svg')
+		font-weight: $weight
+		font-style: $style
+
+
+@mixin light-on-dark() 
+	-webkit-font-smoothing: antialiased
+	-moz-osx-font-smoothing: grayscale
+
+
+@mixin dark-on-light()
+	-webkit-font-smoothing: subpixel-antialiased
+
+
+@mixin rem($attr, $size)
+	#{$attr}: #{$size}px
+	#{$attr}: #{$size/10}rem
+
+
+@mixin px-to-em($size,$base: 16)
+	return $size/$base *1em
+
+

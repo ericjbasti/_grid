@@ -1,0 +1,236 @@
+// menu icon = 
+// similar to what Apple does on their mobile site
+
+[class^="menu-equals"]
+	&:before, &:after
+		content: ''
+		position: absolute
+		left: 50-$toggle-width/2
+		height: $toggle-thickness
+		width: $toggle-width
+		background: $toggle-color
+		border-radius: $toggle-radius
+		@include transform(rotate(0))
+		@include transition(all .5s .0s)
+	&:before
+		top: 25+$toggle-thickness/2
+		border-radius: $toggle-radius
+	&:after
+		bottom: 25+$toggle-thickness/2
+		border-radius: $toggle-radius
+
+// the standard ☰ icon
+
+[class^="menu-triplet"]
+	&:before, &:after, & .menu-icon-extra
+		content: ''
+		position: absolute
+		left: 50-$toggle-width/2
+		height: $toggle-thickness
+		width: $toggle-width
+		background: $toggle-color
+		border-radius: $toggle-radius
+		@include transform(rotate(0))
+		@include transition(all .5s .0s)
+	& .menu-icon-extra
+		top: 50-$toggle-thickness/2
+		border-radius: $toggle-radius
+	&:before
+		top: 25+$toggle-thickness/2
+		border-radius: $toggle-radius
+	&:after
+		bottom: 25+$toggle-thickness/2
+		border-radius: $toggle-radius
+
+// the standard ••• icon
+
+[class^="menu-dots"]
+	&:before, &:after, & .menu-icon-extra
+		content: ''
+		position: absolute
+		left: 50-$toggle-thickness/2
+		height: $toggle-thickness
+		width: $toggle-thickness
+		background: $toggle-color
+		border-radius: $toggle-radius
+		@include transform(rotate(0))
+		@include transition(all .5s .0s)
+	& .menu-icon-extra
+		top: 50-$toggle-thickness/2
+		border-radius: $toggle-radius
+	&:before
+		top: 20+$toggle-thickness/2
+		border-radius: $toggle-radius
+	&:after
+		bottom: 20+$toggle-thickness/2
+		border-radius: $toggle-radius
+// a ☐ icon
+
+[class^="menu-box"]
+	position: absolute
+	height: 80%
+	width: 80%
+	left: 10%
+	top: 10%
+	background: #444
+	border: 4px solid #222
+	border-radius: 4px
+	@include transition(all .5s .0s)
+	& .menu-icon-extra
+		width: 50%
+		height: 100%
+		right: 0
+		top: 0
+		background: #eee
+		position: absolute
+		border-left: 2px solid #999
+		@include transition(all .5s .0s)
+
+#toggle:checked + .toggle-sibling
+	[class^="menu-box"] .menu-icon-extra
+		width: 5%
+
+// when active we will animate into an X
+#toggle:checked + .toggle-sibling
+	[class$="-x"]
+		&:before, & .menu-icon-extra
+			left: 50-$toggle-width/2
+			height: $toggle-thickness
+			width: $toggle-width
+			top: 50-$toggle-thickness/2
+			@include transform(rotate(45deg))
+		&:after
+			left: 50-$toggle-width/2
+			height: $toggle-thickness
+			width: $toggle-width
+			bottom: 50-$toggle-thickness/2
+			@include transform(rotate(-45deg))
+
+// when active we will animate into an -
+#toggle:checked + .toggle-sibling
+	[class$="--"]
+		&:before, & .menu-icon-extra
+			left: 50-$toggle-width/2
+			height: $toggle-thickness
+			width: $toggle-width
+			top: 50-$toggle-thickness/2
+		&:after
+			left: 50-$toggle-width/2
+			height: $toggle-thickness
+			width: $toggle-width
+			bottom: 50-$toggle-thickness/2
+
+
+$big-circle: 70%
+$small-circle : 50%
+
+.menu-circles-x
+	&:before, &:after
+		content: ''
+		position: absolute
+		left: 50%
+		top: 50%
+		border-radius: 50%
+		@include transition(all .5s)
+	&:before
+		background: #222
+		height: $big-circle
+		width: $big-circle
+		margin-left: -$big-circle/2
+		margin-top: -$big-circle/2
+	&:after
+		background: #676767
+		height: $small-circle
+		width: $small-circle
+		margin-left: -$small-circle/2
+		margin-top: -$small-circle/2
+
+#toggle:checked + .toggle-sibling
+	.menu-circles-x:after
+		background: #676767
+		height: $small-circle/2
+		width: $small-circle/2
+		margin-left: -$small-circle/4
+		margin-top: -$small-circle/4
+
+
+
+
+.menu-toggle
+	font-size: 2em
+	display: inline-block
+	padding: 1em
+	cursor: pointer
+	z-index: 100
+	background: rgba(0,0,0,0)
+	@include transition(background .5s)
+.menu-toggle:hover, .menu-toggle:focus
+	background: rgba(0,0,0,.3)
+#toggle
+	display: none
+
+._slide-right, ._slide-left, ._overlay-left
+	position: relative
+	left: 0
+	top: 0
+	@include transition(left, 0.5s)
+
+._slide-right, ._slide-left, ._overlay-left, ._overlay-right
+	.main-nav
+		transform: translate3d(0,0,0)
+		-webkit-transform: translate3d(0,0,0)
+		position: absolute
+		top: 0
+		z-index: 100
+		background: #656565
+		width: 1em * $menu-width
+		height: 100%
+		@include transition(all .5s)
+		.menu-item
+			display: block
+			padding: .5em
+		.primary, .secondary
+			display: block
+			position: static
+			text-align: left
+._slide-right .main-nav, ._overlay-right .main-nav
+	right: -1em * $menu-width
+	@include transform(translateX(0))
+._slide-left .main-nav, ._overlay-left .main-nav
+	left: -1em * $menu-width
+	@include transform(translateX(0))
+.sub-menu
+	position: relative
+	top: .5em
+	left: -.5em
+.overlay
+	position: fixed
+	top: 0
+	left: 0
+	height: 100%
+	width: 100%
+	background: rgba(0,0,0,.5)
+	z-index: 99
+	display: none
+#toggle:checked + .toggle-sibling
+	._slide-right
+		position: relative
+		// left: -($menu-width * $menu-font-size)
+		@include transform(translateX(-$menu-width * $menu-font-size))
+	._slide-left
+		position: relative
+		// left: ($menu-width * $menu-font-size)
+		@include transform(translateX($menu-width * $menu-font-size))
+	._overlay-left .main-nav
+		// left: 0
+		@include transform(translateX(100%))
+	._overlay-right .main-nav
+		// right: 0
+		@include transform(translateX(-100%))
+	.overlay
+		display: block
+		cursor: pointer
+._overlay-right .main-nav
+	// right: 0
+	position: fixed
+	@include transform(translateX(-100%))

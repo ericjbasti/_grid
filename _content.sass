@@ -1,0 +1,59 @@
+@import "bourbon"
+
+.content
+	font-family: $font1
+	font-size: 16px
+	font-size: 1.6rem
+	line-height: 1.5em
+	.alignleft
+		margin-right: 1.5em
+		float: left
+	.alignright
+		margin-left: 1.5em
+		float: right
+	.alignright, .alignleft
+		border: 1px solid $black
+		margin-bottom: .5em
+	img
+		height: auto
+	em
+		font-weight: bold
+	p
+		margin: 0 
+		padding: .5em 0
+
+
+.xl-text
+	@include rem(font-size, 32)
+.l-text
+	@include rem(font-size,24)
+.m-text
+	@include rem(font-size,18)
+.s-text
+	@include rem(font-size,12)
+
+.drop-cap
+	font-size: 5em
+	float: left
+	margin: 0 0.18em 0.18em 0
+	padding-top: .25em
+
+
+[class^="pull-quote"]
+	padding: .8em 1em
+	quotes: "\201C""\201D""\2018""\2019"
+	margin: 0
+	background: #eee
+	margin: .5em 1em
+[class^="pull-quote"]:before
+	content: open-quote
+[class^="pull-quote"]:after
+	content: close-quote
+.pull-quote-left
+	border-left: 4px solid $grey
+	float: left
+	margin-left: 0
+.pull-quote-right
+	border-right: 4px solid $grey
+	float: right
+	margin-right: 0

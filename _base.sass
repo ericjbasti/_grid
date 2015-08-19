@@ -1,0 +1,193 @@
+@import "bourbon"
+
+$button-color: #284EC4
+$button-color-secondary: #B50085
+
+#toggle:checked + div.toggle-sibling
+	overflow-y: hidden
+	position: fixed
+	width: 100%
+
+.large-heading
+	font-size: 2.4em
+	font-weight: 400
+	margin: 0.5em 0 .25em
+.normal-heading
+	font-size: 1.6em
+	font-weight: 500
+	margin: 0.5em 0 .25em
+.small-heading
+	font-size: 1.4em
+	font-weight: 500
+	margin: 0.5em 0 .25em
+
+.media-block
+	position: relative
+	padding-bottom: 56.25%
+	&.slice
+		padding-bottom: 33%
+	iframe, video, img
+		width: 100%
+		height: 100%
+		position: absolute
+		top: 0
+		left: 0
+	.video-overlay, .video-overlay .group
+		color: $white
+		font-size: 3em
+		position: absolute
+		top: 0
+		left: 0
+		height: 100%
+		width: 100%
+		text-align: center
+		text-shadow: 0 2px 2px rgba(0,0,0,0.3)
+		.content
+			font-size: 24px
+
+.button
+	border: $button-border-width solid $button-color
+	background: #fff
+	padding: .75em 1.25em
+	color: $button-color
+	margin: 0 0 .5em 0
+	font-weight: 300
+	@include rem('font-size',14)
+	border-radius: $button-radius
+	line-height: 1em
+	cursor: pointer
+	text-decoration: none
+	font-family: $font1
+	font-weight: 400
+	&:hover, &:focus
+		border-color: darken($button-color,10)
+		color: darken($button-color,10)
+		background: lighten($button-color,50)
+
+.button-bar
+	@extend .group
+	border: none
+	.button
+		border-radius: 0
+		border-right-width: $button-border-width/2
+		border-left-width: $button-border-width/2
+		@include transition(all .3s)
+		&:first-child
+			border-left-width: $button-border-width
+			border-top-left-radius: $button-radius
+			border-bottom-left-radius: $button-radius
+		&:last-child
+			border-right-width: $button-border-width
+			border-top-right-radius: $button-radius
+			border-bottom-right-radius: $button-radius
+
+
+.button-primary
+	color: #fff
+	background-color: $button-color
+	border-color: $button-color
+	&:hover, &:focus
+		color: #fff
+		background-color: darken($button-color,10)
+		border-color: darken($button-color,10)
+
+.button-secondary
+	color: #fff
+	background-color: $button-color-secondary
+	border-color: $button-color-secondary
+	&:hover, &:focus
+		color: #fff
+		background-color: darken($button-color-secondary,10)
+		border-color: darken($button-color-secondary,10)
+
+.accordian
+	font-size: 1.4em
+.accordian-toggle
+	display: none
+.accordian-label
+	border: 1px solid $border-color
+	padding: .75em 1em
+	display: block
+	border-radius: .25em
+	margin-bottom: .5em
+	cursor: pointer
+	position: relative
+	&:after
+		content: '+'
+		position: absolute
+		right: 0
+		padding: 0 1em
+		color: $border-color
+
+.accordian-toggle:checked + .accordian-label
+	background: #eee
+	border-bottom-right-radius: 0
+	border-bottom-left-radius: 0
+	margin-bottom: 0em
+	&:after
+		content: '–'
+.accordian-content
+	display: none
+	@include transition(all .5s)
+.accordian-toggle:checked ~ .accordian-content
+	display: block
+	padding: 1em
+	border: 1px solid $border-color-fade
+	border-top: none
+	margin-bottom: 1em
+	border-bottom-right-radius: .25em
+	border-bottom-left-radius: .25em
+
+.tabs
+	position: relative
+	
+.tab-toggle
+	display: none
+.tab-content
+	display: none
+.tab-toggle:checked ~ .tab-content
+	display: block
+
+
+.dropdown
+	display: inline-block
+	position: relative
+	vertical-align: bottom
+	.buttom
+		z-index: 3
+	ul
+		display: none
+		position: absolute
+		top: 3.65em
+		border-radius: 3px
+		border-top-left-radius: 0
+		z-index: 2
+		background: $white
+		padding: 0
+		list-style: none
+		min-width: 100%
+		margin: 0
+		box-shadow: 0 2px 2px rgba(0,0,0,0.3)
+		border: 2px solid $button-color
+	.menu-item
+		display: block
+	.menu-item-link
+		font-size: 1.4em
+		padding: .5em .8em
+		display: block
+		text-decoration: none
+		color: $button-color
+		white-space: nowrap
+		&:hover, &:focus
+			background: $button-color
+			color: #fff
+	&:hover, &:focus
+		.button
+			border-bottom-right-radius: 0
+			border-bottom-left-radius: 0
+			border-bottom-color: #fff
+			background: $button-color
+			color: $white
+		ul
+			display: block
+

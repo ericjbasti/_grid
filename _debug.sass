@@ -1,0 +1,19 @@
+// Include an 
+
+#debug-overlay
+	position: fixed
+	top: 0
+	left: 0
+	z-index: 501
+	&-image
+		display: none
+		position: absolute
+		top: 0
+		left: 50%
+		z-index: 500
+		@include transform(translateX(-50%))
+		img
+			opacity: .5
+
+#debug-overlay:checked + .debug-overlay-image
+	display: block

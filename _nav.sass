@@ -1,0 +1,87 @@
+@import "bourbon"
+
+$menuWidth : 15em !default
+$footerHeight : 5em !default
+
+ul, ol
+	padding: 0
+	margin: 0
+	list-style-position: inside
+li
+	margin-left: .5em
+nav
+	ul, li
+		padding: 0
+		margin: 0
+		list-style: none
+		@include box-sizing(border-box)
+	// .primary
+	// .secondary
+	// .footer
+
+nav.slide
+	position: absolute
+	top: 0
+	left: -$menuWidth
+
+
+// The toggle for the menu navigation is a simple hidden checkbox.
+input#toggle
+	display: none
+
+// When the menu toggle is checked we slide the whole site to the left $menuWidth
+input#toggle:checked + #inner-wrap
+	left: $menuWidth
+
+// The label is used as the display element for the menu toggle
+label[for="toggle"]
+	font-size: 2em
+	height: 1.5em 
+	width: 1.5em
+	padding: .5em
+	cursor: pointer
+	display: inline-block
+	background: rgba(255,255,255,.5)
+
+body
+	background: #333
+
+#outer-wrap
+	position: relative
+	overflow: hidden
+	width: 100%
+
+#inner-wrap
+	position: relative
+	@include transition(left .5s)
+	background: #eee
+	left: 0
+header
+	background: #006699
+	.logo
+		width: $menuWidth
+		height: 7em
+		background: #00ccff
+footer
+	height: 0
+
+
+
+@media screen and (min-width: 30em) // 480px/16px = 30em
+	label[for="toggle"]
+		display: none
+	input#toggle:checked + #inner-wrap
+		left: 0
+	nav.slide
+		position: static
+		left: 0
+	nav 
+		ul, li
+			display: inline-block
+		.footer
+			position: absolute
+			bottom: $footerHeight - 3em
+			left: 0
+			padding: 1em
+	footer
+		height: $footerHeight
